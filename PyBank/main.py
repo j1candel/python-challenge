@@ -1,9 +1,10 @@
 import os 
 import csv
 
-#Assigning a path to file 
-budget_csv = os.path.join(".","Resources","budget_data.csv")
+#Assigning a path to open file
+budget_csv = os.path.join("Resources","budget_data.csv")
 
+#Define the function so 'budget_csv' is the sole parameter 
 with open(budget_csv,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     
@@ -41,29 +42,43 @@ with open(budget_csv,'r') as csvfile:
         #Add total_loss 
         net_profit = total_profit + total_loss
         
+        #convert to a dollar amount 
+        total =  "${:,.2f}".format(net_profit)
+
         #Every Row greater than zero 
         if i > 0:
             profit_difference_added += (profit - prev_profit)
             profit_difference = profit - prev_profit
         prev_profit = profit
 
+        #Divide profit_difference by total months to get average 
         average_change=profit_difference_added/total_months
-   
+        
+        #convert to a dollar amount 
+        average_change_difference =  "${:,.2f}".format(average_change)
+        
         if max_difference < profit_difference:   
             max_difference = profit_difference
             max_name = str((row[0])) 
-       
+
+        #convert to a dollar amount 
+        greatest_max_difference =  "${:,.2f}".format(max_difference)
+
         if min_difference > profit_difference:
             min_difference = profit_difference
             min_name = str((row[0])) 
+        
+        #convert to a dollar amount 
+        greatest_min_difference =  "${:,.2f}".format(min_difference)
 
+    #Print out all the outputs 
     print("Financial Analysis")
     print("-------------------------------------")
     print(f'Total Months: {total_months}')
-    print(f'Total: ${net_profit}')
-    print(f'Avergae Change: ${average_change}')
-    print(f'Greatest Increase in Profits: {max_name} (${max_difference})')
-    print(f'Greatest Decrease in Profits: {min_name} (${min_difference})')
+    print(f'Total: ${total}')
+    print(f'Avergae Change: {average_change_difference}')
+    print(f'Greatest Increase in Profits: {max_name} ({greatest_max_difference})')
+    print(f'Greatest Decrease in Profits: {min_name} ({greatest_min_difference})')
 
 
 
