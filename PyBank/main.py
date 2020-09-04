@@ -1,3 +1,4 @@
+#Modules 
 import os 
 import csv
 
@@ -23,8 +24,10 @@ with open(budget_csv,'r') as csvfile:
     min_difference =0
     name = ""
 
-    
+    #read through each row of data after the header
+    #putting a number for each row 
     for i, row in enumerate(csvreader):
+        
         #Adding up the total months 
         total_months += 1
         
@@ -45,10 +48,12 @@ with open(budget_csv,'r') as csvfile:
         #convert to a dollar amount 
         total =  "${:,.2f}".format(net_profit)
 
-        #Every Row greater than zero 
+        #if every row is greater than zero add the difference between rows 
         if i > 0:
             profit_difference_added += (profit - prev_profit)
             profit_difference = profit - prev_profit
+        
+        #Assign profit to previous profit 
         prev_profit = profit
 
         #Divide profit_difference by total months to get average 
@@ -57,15 +62,21 @@ with open(budget_csv,'r') as csvfile:
         #convert to a dollar amount 
         average_change_difference =  "${:,.2f}".format(average_change)
         
-        if max_difference < profit_difference:   
+        #if max difference is smaller assign to max difference 
+        if max_difference < profit_difference:  
             max_difference = profit_difference
+            
+            #Set the name of the max value to the first row 
             max_name = str((row[0])) 
 
         #convert to a dollar amount 
         greatest_max_difference =  "${:,.2f}".format(max_difference)
 
+        #if max_difference is bigger assign to max difference 
         if min_difference > profit_difference:
             min_difference = profit_difference
+            
+            #Set the name of the minimum value to the first row 
             min_name = str((row[0])) 
         
         #convert to a dollar amount 

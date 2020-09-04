@@ -1,3 +1,4 @@
+#Modules 
 import os 
 import csv
 
@@ -23,7 +24,8 @@ with open(election_csv,'r') as csvfile:
     counted_correy = 0
     counted_li = 0
     counted_otooley = 0
- 
+    
+    #read through each row of data after the data 
     for row in csvreader:
         total_votes += 1
 
@@ -70,21 +72,29 @@ with open(election_csv,'r') as csvfile:
         #Convert into a percentage 
         percentage_otooley = "{:.0%}".format(otooley_percentage)
 
+        #Set the name of the candidate equal to its percentage of votes 
         Khan=percentage_khan
         Correy=percentage_correy
         Li=percentage_li
         OTooley=percentage_otooley
 
+        #If Khan is greater than Correy, Li, and Otooley then Khan is the winner 
         if Khan > Correy and Khan > Li and Khan > OTooley:
             winner = 'Khan'
+
+        #If Correy is greater than Khan, Li, and Otooley then Correy is the winner 
         elif Correy > Khan and Correy > Li and Correy > OTooley:
             winner = 'Correy'
+        
+        #If Li is greater than Khan, Correy, and Otooley then Li is the winner 
         elif Li > Khan and Li > Correy and Li > OTooley:
             winner = 'Li'
+        
+        #If O'Tooley is greater than Khan, Correy, and Li then O'Tooley is the winner 
         elif OTooley > Khan and OTooley > Correy and OTooley > Li:
             winner = 'OTooley'
 
-print(counted_otooley)
+#Print results 
 print(f'Election Results')
 print(f'--------------------------')
 print(f'Total Votes: {total_votes}')
