@@ -5,6 +5,7 @@ import csv
 #Assigning a path to open file
 budget_csv = os.path.join("Resources","budget_data.csv")
 
+#Assigning a path to put a text file into the Analysis folder
 output_path = os.path.join(".","Analysis","PyBank_analysis.txt")
 
 #Define the function so 'budget_csv' is the sole parameter 
@@ -85,7 +86,6 @@ with open(budget_csv,'r') as csvfile:
         greatest_min_difference =  "${:,.2f}".format(min_difference)
 
     #Print out all the outputs 
-   
     print("Financial Analysis")
     print("-------------------------------------")
     print(f'Total Months: {total_months}')
@@ -94,8 +94,10 @@ with open(budget_csv,'r') as csvfile:
     print(f'Greatest Increase in Profits: {max_name} ({greatest_max_difference})')
     print(f'Greatest Decrease in Profits: {min_name} ({greatest_min_difference})')
 
-
+#Define the function so 'output_path' is the sole parameter 
 with open(output_path,"w", newline = '') as textfile:
+    
+    #Print all the output into a text file in Analysis 
     print("Financial Analysis", file=textfile)
     print("-------------------------------------", file=textfile)
     print(f'Total Months: {total_months}', file=textfile)

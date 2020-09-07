@@ -5,7 +5,9 @@ import csv
 #Assigning a path to open file
 election_csv=os.path.join("Resources","election_data.csv")
 
+#Assigning an out path to place a text file in Analysis 
 output_path = os.path.join(".","Analysis","PyPoll_analysis.txt")
+
 #Define the function so 'election_csv' is the sole parameter 
 with open(election_csv,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -28,6 +30,8 @@ with open(election_csv,'r') as csvfile:
     
     #read through each row of data after the data 
     for row in csvreader:
+        
+        #Adding up the rows to find the total amount of votes 
         total_votes += 1
 
         #Setting Votes equal to the 3rd row 
@@ -108,7 +112,10 @@ print(f'--------------------------')
 print(f'Winner: {winner}')
 print(f'--------------------------')
 
+#Define the function so 'output_path' is the sole parameter 
 with open(output_path,"w", newline = '') as textfile:
+
+    #Print all the output into a text file in Analysis 
     print(f'Election Results',file=textfile)
     print(f'--------------------------',file=textfile)
     print(f'Total Votes: {total_votes}',file=textfile)
