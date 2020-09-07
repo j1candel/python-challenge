@@ -5,6 +5,7 @@ import csv
 #Assigning a path to open file
 election_csv=os.path.join("Resources","election_data.csv")
 
+output_path = os.path.join(".","Analysis","PyPoll_analysis.txt")
 #Define the function so 'election_csv' is the sole parameter 
 with open(election_csv,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -106,4 +107,17 @@ print(f"OTooley: {percentage_otooley} ({counted_otooley})")
 print(f'--------------------------')
 print(f'Winner: {winner}')
 print(f'--------------------------')
+
+with open(output_path,"w", newline = '') as textfile:
+    print(f'Election Results',file=textfile)
+    print(f'--------------------------',file=textfile)
+    print(f'Total Votes: {total_votes}',file=textfile)
+    print(f'--------------------------',file=textfile)
+    print(f'Khan: {percentage_khan} ({counted_khan})',file=textfile)
+    print(f'Correy: {percentage_correy} ({counted_correy})',file=textfile)
+    print(f'Li: {percentage_li} ({counted_li})',file=textfile)
+    print(f"OTooley: {percentage_otooley} ({counted_otooley})",file=textfile)
+    print(f'--------------------------',file=textfile)
+    print(f'Winner: {winner}',file=textfile)
+    print(f'--------------------------',file=textfile)
 

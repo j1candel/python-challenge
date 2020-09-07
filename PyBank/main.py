@@ -5,6 +5,8 @@ import csv
 #Assigning a path to open file
 budget_csv = os.path.join("Resources","budget_data.csv")
 
+output_path = os.path.join(".","Analysis","PyBank_analysis.txt")
+
 #Define the function so 'budget_csv' is the sole parameter 
 with open(budget_csv,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
@@ -57,7 +59,7 @@ with open(budget_csv,'r') as csvfile:
         prev_profit = profit
 
         #Divide profit_difference by total months to get average 
-        average_change=profit_difference_added/total_months
+        average_change = profit_difference_added/(total_months)
         
         #convert to a dollar amount 
         average_change_difference =  "${:,.2f}".format(average_change)
@@ -83,6 +85,7 @@ with open(budget_csv,'r') as csvfile:
         greatest_min_difference =  "${:,.2f}".format(min_difference)
 
     #Print out all the outputs 
+   
     print("Financial Analysis")
     print("-------------------------------------")
     print(f'Total Months: {total_months}')
@@ -90,6 +93,16 @@ with open(budget_csv,'r') as csvfile:
     print(f'Avergae Change: {average_change_difference}')
     print(f'Greatest Increase in Profits: {max_name} ({greatest_max_difference})')
     print(f'Greatest Decrease in Profits: {min_name} ({greatest_min_difference})')
+
+
+with open(output_path,"w", newline = '') as textfile:
+    print("Financial Analysis", file=textfile)
+    print("-------------------------------------", file=textfile)
+    print(f'Total Months: {total_months}', file=textfile)
+    print(f'Total: ${total}', file=textfile)
+    print(f'Avergae Change: {average_change_difference}', file=textfile)
+    print(f'Greatest Increase in Profits: {max_name} ({greatest_max_difference})', file=textfile)
+    print(f'Greatest Decrease in Profits: {min_name} ({greatest_min_difference})', file=textfile)
 
 
 
